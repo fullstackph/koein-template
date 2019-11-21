@@ -1,3 +1,4 @@
 node_modules
 stylesheets/main.min.css
 javascripts/bundle.min.js
+javascripts/main.min.js
