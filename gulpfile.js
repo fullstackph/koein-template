@@ -30,7 +30,7 @@ function minifyCSS() {
     .pipe(gulp.dest("stylesheets"));
 }
 
-function transpileJS() {
+function compileJS() {
   return gulp
     .src("javascripts/main.js", { sourcemaps: true })
     .pipe(babel({ presets: ["@babel/preset-env"] }))
@@ -39,15 +39,24 @@ function transpileJS() {
     .pipe(gulp.dest("javascripts"));
 }
 
+function transpileJS() {
+  return gulp
+    .src("javascripts/main.js")
+    .pipe(babel({ presets: ["@babel/preset-env"] }))
+    .pipe(rename({ basename: "main", suffix: ".min" }))
+    .pipe(gulp.dest("javascripts"));
+}
+
 function watch() {
   browserSync.init({ server: "./" });
   gulp.watch("./stylesheets/**/*.scss", sassCompile);
+  gulp.watch("./javascripts/main.js", transpileJS);
   gulp.watch("./*.html").on("change", browserSync.reload);
 }
 
 const build = gulp.parallel(
   gulp.series(sassCompile, autoprefixCSS, minifyCSS),
-  gulp.series(transpileJS)
+  gulp.series(compileJS)
 );
 
 exports.default = watch;
