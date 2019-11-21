@@ -21,7 +21,7 @@
   "homepage": "https://github.com/psdwizard/koein-template#readme",
   "browserslist": [
     "last 2 versions",
-    "not ie <= 7"
+    "not ie <= 10"
   ],
   "devDependencies": {
     "@babel/core": "^7.7.2",
